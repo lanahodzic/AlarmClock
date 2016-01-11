@@ -14,6 +14,8 @@
 		3FBFC34D1C3F03EE003A241C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FBFC34B1C3F03EE003A241C /* LaunchScreen.storyboard */; };
 		3FBFC3581C3F03EE003A241C /* AlarmClockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3571C3F03EE003A241C /* AlarmClockTests.swift */; };
 		3FBFC3631C3F03EE003A241C /* AlarmClockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3621C3F03EE003A241C /* AlarmClockUITests.swift */; };
+		3FBFC3751C436354003A241C /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3741C436354003A241C /* ClockFace.swift */; };
+		3FBFC3771C436A4D003A241C /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3761C436A4D003A241C /* ClockViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		3FBFC35E1C3F03EE003A241C /* AlarmClockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlarmClockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FBFC3621C3F03EE003A241C /* AlarmClockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClockUITests.swift; sourceTree = "<group>"; };
 		3FBFC3641C3F03EE003A241C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FBFC3741C436354003A241C /* ClockFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockFace.swift; path = ../ClockFace.swift; sourceTree = "<group>"; };
+		3FBFC3761C436A4D003A241C /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 		3FBFC3411C3F03EE003A241C /* AlarmClock */ = {
 			isa = PBXGroup;
 			children = (
+				3FBFC3761C436A4D003A241C /* ClockViewController.swift */,
+				3FBFC3741C436354003A241C /* ClockFace.swift */,
 				3FBFC3421C3F03EE003A241C /* AppDelegate.swift */,
 				3FBFC3441C3F03EE003A241C /* ViewController.swift */,
 				3FBFC3461C3F03EE003A241C /* Main.storyboard */,
@@ -257,7 +263,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FBFC3451C3F03EE003A241C /* ViewController.swift in Sources */,
+				3FBFC3751C436354003A241C /* ClockFace.swift in Sources */,
 				3FBFC3431C3F03EE003A241C /* AppDelegate.swift in Sources */,
+				3FBFC3771C436A4D003A241C /* ClockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

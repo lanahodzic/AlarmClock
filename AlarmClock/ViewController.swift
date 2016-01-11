@@ -9,15 +9,22 @@
 import UIKit
 
 class AlarmCell: UITableViewCell {
-    
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var state: UISwitch!
+    var alarmSet:Bool?
 }
 
 class ViewController: UITableViewController {
 
+    var alarms: [String] = ["6:00 AM", "7:30 AM", "8:15 AM", "10:30 AM"]
     
     @IBOutlet var alarm_table: UITableView!
+    
+    @IBAction func SetAlarm(sender: AnyObject) {
+        let alarm_switch = sender as! UISwitch
+        let cell = alarm_switch.superview!.superview as! AlarmCell
+        cell.alarmSet = alarm_switch.selected
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +36,22 @@ class ViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("alarmCell", forIndexPath: indexPath) as! AlarmCell
+        // Configure the cell...
+        let alarm = alarms[indexPath.row]
+        cell.time.text = alarm
+        cell.state.tag = indexPath.row
+        return cell
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alarm_table.numberOfRowsInSection(section)
+        return alarms.count
     }
     
     
