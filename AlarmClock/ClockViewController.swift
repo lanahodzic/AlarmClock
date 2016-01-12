@@ -14,6 +14,47 @@ class ClockViewController: UIViewController {
     var clockView:ClockFace?
     var hourLayer:CAShapeLayer?
     var minuteLayer:CAShapeLayer?
+    var save:UIButton?
+    var minPos:CGPoint?
+    var hourPos: CGPoint?
+    var minVec:CGVector?
+    var hourVec:CGVector?
+    
+    @IBAction func SaveAlarm(sender: AnyObject) {
+        //TODO figure out how to get what number is selected
+       // drawText(rect, context: context!, x:CGRectGetMidX(rect), y: CGRectGetMidY(rect), radius: radius, sides: 12, color: UIColor.whiteColor())
+        let radius = CGRectGetWidth(self.view.frame) / 3.5
+        let x = CGRectGetMidX(self.clockView!.frame)
+        let y = CGRectGetMidY(self.clockView!.frame)
+        let sides = 12
+        let inset:CGFloat = radius / 3.5
+        let points = circleCircumferencePoints(sides, x: x, y: y, radius: radius - inset, adjustment: 270)
+        for p in points.enumerate() {
+            if p.index > 0 {
+                let aFont = UIFont(name: "Optima-Bold", size: radius/5)
+                let attr:CFDictionaryRef = [NSFontAttributeName:aFont!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+                let text = CFAttributedStringCreate(nil, p.index.description, attr)
+                let line = CTLineCreateWithAttributedString(text)
+                let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+                let xn = p.element.x - bounds.width/2
+                let yn = p.element.y - bounds.midY
+               // print("\(p.index.description)")
+                //print("\(xn), \(yn)")
+                
+                let px = hourPos!.x - bounds.width/2
+                let py = hourPos!.y - bounds.midY
+                
+                if abs(xn - hourPos!.x) < 10.0 {
+                    print("\(p.index.description)")
+                    print("\(xn - px)")
+                    print("\(xn), \(yn)")
+                    print("\(px), \(py)")
+                    print("\(hourPos!.x), \(hourPos!.y)")
+                }
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,9 +99,16 @@ class ClockViewController: UIViewController {
         let location = touch.locationInView(self.view)
         if i % 2 == 0 {
             //TODO make sure the hour hand is shorter than the minute hand
+            print("TOUCH")
            let path = CGPathCreateMutable()
-            CGPathMoveToPoint(path, nil, CGRectGetMidX(self.clockView!.frame), CGRectGetMidY(self.clockView!.frame))
-            CGPathAddLineToPoint(path, nil, location.x, location.y)
+            let c_x = CGRectGetMidX(self.clockView!.frame)
+            let c_y = CGRectGetMidY(self.clockView!.frame)
+            CGPathMoveToPoint(path, nil, c_x, c_y)
+            let vec = CGVector(dx: location.x - c_x, dy: location.y - c_y)
+            hourVec = vec
+            let pt = CGPoint(x: c_x + 0.5 * vec.dx, y: c_y + 0.5 * vec.dy)
+            hourPos = location
+            CGPathAddLineToPoint(path, nil, pt.x, pt.y)
             hourLayer!.frame = clockView!.frame
             hourLayer!.path = path
             hourLayer!.lineWidth = 4
@@ -71,9 +119,16 @@ class ClockViewController: UIViewController {
         }
         else {
             //TODO make sure that the minute hand is longer than the hour hand
+            print("TOUCH")
             let path = CGPathCreateMutable()
-            CGPathMoveToPoint(path, nil, CGRectGetMidX(self.clockView!.frame), CGRectGetMidY(self.clockView!.frame))
-            CGPathAddLineToPoint(path, nil, location.x, location.y)
+            let c_x = CGRectGetMidX(self.clockView!.frame)
+            let c_y = CGRectGetMidY(self.clockView!.frame)
+            CGPathMoveToPoint(path, nil, c_x, c_y)
+            let vec = CGVector(dx: location.x - c_x, dy: location.y - c_y)
+            minVec = vec
+            let pt = CGPoint(x: c_x + 0.75 * vec.dx, y: c_y + 0.75 * vec.dy)
+            minPos = location
+            CGPathAddLineToPoint(path, nil, pt.x, pt.y)
             minuteLayer!.frame = clockView!.frame
             minuteLayer!.path = path
             minuteLayer!.lineWidth = 3
