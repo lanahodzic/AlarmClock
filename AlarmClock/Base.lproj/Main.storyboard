@@ -65,7 +65,7 @@
             </objects>
             <point key="canvasLocation" x="-281" y="-293"/>
         </scene>
-        <!--Clock View Controller-->
+        <!--Set Alarm Time-->
         <scene sceneID="7Ui-mW-AM4">
             <objects>
                 <viewController id="5S8-yC-mlc" customClass="ClockViewController" customModule="AlarmClock" customModuleProvider="target" sceneMemberID="viewController">
@@ -78,6 +78,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Set Alarm Time" id="3h9-8s-Hff">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SxG-1s-7Dc">
+                            <connections>
+                                <action selector="SaveAlarm:" destination="5S8-yC-mlc" id="hy6-x2-dPv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6R3-Ty-wp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
