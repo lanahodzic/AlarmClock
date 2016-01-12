@@ -17,6 +17,8 @@ class AlarmCell: UITableViewCell {
 class ViewController: UITableViewController {
 
     var alarms: [String] = ["6:00 AM", "7:30 AM", "8:15 AM", "11:18"]
+
+    var openedFromNotification: Bool = false
     
     @IBOutlet var alarm_table: UITableView!
     
@@ -33,7 +35,7 @@ class ViewController: UITableViewController {
             let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
             let alarmDate = gregorian?.nextDateAfterDate(NSDate(), matchingHour: Int(timeComponents![0])!, minute: Int(timeComponents![1])!, second: 0, options: NSCalendarOptions.MatchNextTime)
             notification.fireDate = alarmDate
-//            notification.fireDate = NSDate().dateByAddingTimeInterval(5)
+            notification.fireDate = NSDate().dateByAddingTimeInterval(10)
             notification.alertBody = "Wake up"
             notification.hasAction = true
             notification.soundName = UILocalNotificationDefaultSoundName
@@ -77,7 +79,7 @@ class ViewController: UITableViewController {
         print("SNOOZE")
         let notification = UILocalNotification()
         notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.fireDate = NSDate().dateByAddingTimeInterval(5)
+        notification.fireDate = NSDate().dateByAddingTimeInterval(10)
         notification.alertBody = "Wake up (snooze)"
         notification.hasAction = true
         notification.soundName = UILocalNotificationDefaultSoundName
