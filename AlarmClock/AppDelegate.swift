@@ -19,8 +19,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var types: UIUserNotificationType = UIUserNotificationType()
         types.insert(UIUserNotificationType.Alert)
         types.insert(UIUserNotificationType.Badge)
+        types.insert(UIUserNotificationType.Sound)
 
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        let snoozeAction = UIMutableUserNotificationAction()
+        snoozeAction.identifier = "Snooze"
+        snoozeAction.title = "Snooze"
+        snoozeAction.activationMode = UIUserNotificationActivationMode.Background
+        snoozeAction.authenticationRequired = false
+        snoozeAction.destructive = false
+
+        let dismissAction = UIMutableUserNotificationAction()
+        dismissAction.identifier = "Dismiss"
+        dismissAction.title = "Dismiss"
+        dismissAction.activationMode = UIUserNotificationActivationMode.Background
+        dismissAction.authenticationRequired = false
+        dismissAction.destructive = false
+
+        let actionsArray:[UIUserNotificationAction] = [snoozeAction, dismissAction]
+        let alarmCategory = UIMutableUserNotificationCategory()
+        alarmCategory.identifier = "alarmCategory"
+        alarmCategory.setActions(actionsArray, forContext: UIUserNotificationActionContext.Default)
+        alarmCategory.setActions(actionsArray, forContext: UIUserNotificationActionContext.Minimal)
+        let categoriesForSettings:Set<UIUserNotificationCategory> = [alarmCategory]
+
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: categoriesForSettings)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
 
         return true
@@ -50,6 +72,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         application.presentLocalNotificationNow(notification)
+    }
+
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+        if identifier == "Snooze" {
+            NSNotificationCenter.defaultCenter().postNotificationName("snoozeNotification", object: nil)
+        }
+        else if identifier == "Dismiss" {
+            NSNotificationCenter.defaultCenter().postNotificationName("dismissNotification", object: nil)
+        }
+
+        completionHandler()
     }
 
 }

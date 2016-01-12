@@ -37,6 +37,7 @@ class ViewController: UITableViewController {
             notification.alertBody = "Wake up"
             notification.hasAction = true
             notification.soundName = UILocalNotificationDefaultSoundName
+            notification.category = "alarmCategory"
             print(notification)
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
         }
@@ -45,6 +46,8 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSnoozeNotification", name: "snoozeNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleDismissNotification", name: "dismissNotification", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,5 +73,21 @@ class ViewController: UITableViewController {
         return alarms.count
     }
 
+    func handleSnoozeNotification() {
+        print("SNOOZE")
+        let notification = UILocalNotification()
+        notification.timeZone = NSTimeZone.defaultTimeZone()
+        notification.fireDate = NSDate().dateByAddingTimeInterval(5)
+        notification.alertBody = "Wake up (snooze)"
+        notification.hasAction = true
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.category = "alarmCategory"
+        print(notification)
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+
+    func handleDismissNotification() {
+        print("DISMISS")
+    }
 }
 
