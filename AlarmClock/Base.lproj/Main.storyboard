@@ -15,7 +15,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" id="EF3-G2-mst" customClass="AlarmCell" customModule="AlarmClock" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EF3-G2-mst" id="OlE-FR-ihH">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -24,7 +24,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBA-3e-mer" userLabel="AlarmTime">
                                             <rect key="frame" x="8" y="11" width="101" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GzP-fI-awX">
@@ -81,14 +81,14 @@
                     <navigationItem key="navigationItem" title="Set Alarm Time" id="3h9-8s-Hff">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="SxG-1s-7Dc">
                             <connections>
-                                <action selector="SaveAlarm:" destination="5S8-yC-mlc" id="hy6-x2-dPv"/>
+                                <segue destination="uVn-38-MjF" kind="show" id="6iA-qI-EHU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6R3-Ty-wp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="-293"/>
+            <point key="canvasLocation" x="857" y="-449"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eHs-Ib-jNa">
@@ -107,4 +107,7 @@
             <point key="canvasLocation" x="-1101" y="-293"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="6iA-qI-EHU"/>
+    </inferredMetricsTieBreakers>
 </document>

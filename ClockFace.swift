@@ -41,8 +41,6 @@ class ClockFace: UIView {
             CGContextRestoreGState(context)
         }
         
-        secondMarkers(context!, x: CGRectGetMidX(rect), y: CGRectGetMidY(rect), radius: radius, sides: 60, color: UIColor.whiteColor())
-        
         drawText(rect, context: context!, x:CGRectGetMidX(rect), y: CGRectGetMidY(rect), radius: radius, sides: 12, color: UIColor.whiteColor())
     }
 }
