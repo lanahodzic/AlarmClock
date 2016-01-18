@@ -15,12 +15,17 @@ class AlarmCell: UITableViewCell {
 }
 
 class ViewController: UITableViewController {
+<<<<<<< HEAD
     
     var alarms: [String] = ["6:00 AM", "7:30 AM", "8:15 AM", "10:30 AM"]
     var selectedRowIndex = -1
     var isCellTapped = false
+=======
+
+    var alarms: [String] = ["6:00 AM", "7:30 AM", "8:15 AM", "11:18"]
 
     var openedFromNotification: Bool = false
+>>>>>>> origin/master
     
     @IBOutlet var alarm_table: UITableView!
     
@@ -111,6 +116,12 @@ class ViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alarms.count
     }
+<<<<<<< HEAD
+    
+    
+    
+    
+=======
 
     func handleSnoozeNotification() {
         print("SNOOZE")
@@ -128,5 +139,6 @@ class ViewController: UITableViewController {
     func handleDismissNotification() {
         print("DISMISS")
     }
+>>>>>>> origin/master
 }
 
