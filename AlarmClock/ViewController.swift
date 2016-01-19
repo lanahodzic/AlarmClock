@@ -26,7 +26,6 @@ class ViewController: UITableViewController {
     
     @IBAction func SetAlarm(sender: AnyObject) {
         let alarm_switch = sender as! UISwitch
-        alarm_switch.addTarget(self, action: "toggleAlarm", forControlEvents: UIControlEvents.ValueChanged)
         let cell = alarm_switch.superview!.superview as! AlarmCell
         cell.alarmSet = alarm_switch.selected
 
