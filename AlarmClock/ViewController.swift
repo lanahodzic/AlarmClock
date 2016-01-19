@@ -35,8 +35,8 @@ class ViewController: UITableViewController {
             let notification = UILocalNotification()
             notification.timeZone = NSTimeZone.defaultTimeZone()
             let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-            let alarmDate = gregorian?.nextDateAfterDate(NSDate(), matchingHour: Int(timeComponents![0])!, minute: Int(timeComponents![1])!, second: 0, options: NSCalendarOptions.MatchNextTime)
-            notification.fireDate = alarmDate
+            // let alarmDate = gregorian?.nextDateAfterDate(NSDate(), matchingHour: Int(timeComponents![0])!, minute: Int(timeComponents![1])!, second: 0, options: NSCalendarOptions.MatchNextTime)
+            // notification.fireDate = alarmDate
             notification.fireDate = NSDate().dateByAddingTimeInterval(10)
             notification.alertBody = "Wake up"
             notification.hasAction = true
