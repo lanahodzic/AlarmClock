@@ -67,10 +67,14 @@ class ViewController: UITableViewController {
         // if selectedRowIndex != indexPath.row {
         
         self.alarm_table.cellForRowAtIndexPath(indexPath)?.backgroundColor = UIColor.grayColor()
-        
+        let cell = self.alarm_table.cellForRowAtIndexPath(indexPath) as! AlarmCell
+        let del = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 34))
+        del.setTitle("Delete", forState: UIControlState.Normal)
+        self.alarm_table.cellForRowAtIndexPath(indexPath)?.addSubview(del)
         
         if selectedRowIndex != -1 {
             self.alarm_table.cellForRowAtIndexPath(NSIndexPath(forRow: self.selectedRowIndex, inSection: 0))?.backgroundColor = UIColor.whiteColor()
+            del.removeFromSuperview()
         }
             
         if self.selectedRowIndex != indexPath.row {

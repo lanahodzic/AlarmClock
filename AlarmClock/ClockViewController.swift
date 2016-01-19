@@ -277,6 +277,42 @@ class ClockViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let controller = segue.destinationViewController as! ViewController
         controller.alarms.append("7:35 AM")
+        let x = CGRectGetMidX(self.clockView!.frame)
+        let y = CGRectGetMidY(self.clockView!.frame)
+        let vec = CGVector(dx: hourPos!.x - x, dy: hourPos!.y - y)
+        let hour_len = sqrt(vec.dx * vec.dx + vec.dy * vec.dy)
+        let ang = (vec.dy / hour_len)
+        print("\(vec.dx), \(vec.dy)")
+        if vec.dx < 0 {
+            
+        }
+//        let rad = asin(ang)
+//        var deg : CGFloat = 0
+//        if vec.dx > 0 {
+//            deg = rad * (180 / CGFloat(M_PI)) + CGFloat(270)
+//        }
+//        else {
+//            deg = rad * (180 / CGFloat(M_PI)) + CGFloat(90)
+//        }
+//        //                 + ((M_PI) * 270 / 180)
+//        print("\(ang)")
+//        print("\(rad)")
+//        print("\(deg)")
+//        print("\((deg + 1) / 30)")
+//        let hour = Int(floor((deg + 5) / 30))
+//        print("\(hour)")
+        
+        let min_vec = CGVector(dx: minPos!.x - x, dy: minPos!.y - y)
+        let min_len = sqrt(min_vec.dx * min_vec.dx + min_vec.dy * min_vec.dy)
+        let min_ang = (min_vec.dy / min_len)
+        let min_rad = asin(min_ang)
+        let min_deg = min_rad * (180 / CGFloat(M_PI)) + 90
+        //                // + ((M_PI) * 270 / 180)
+        //                print("\(rad)")
+        //                print("\(deg)")
+        //                print("\((deg + 1) / 30)")
+        let min = Int(floor((min_deg + 5) / 30)) * 5
+        print("\(min)")
         controller.alarm_table?.reloadData()
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
