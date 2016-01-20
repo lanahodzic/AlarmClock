@@ -16,6 +16,9 @@
 		3FBFC3631C3F03EE003A241C /* AlarmClockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3621C3F03EE003A241C /* AlarmClockUITests.swift */; };
 		3FBFC3751C436354003A241C /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3741C436354003A241C /* ClockFace.swift */; };
 		3FBFC3771C436A4D003A241C /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3761C436A4D003A241C /* ClockViewController.swift */; };
+		837FF31C1C4EE10400D7F014 /* radar.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 837FF3191C4EE10400D7F014 /* radar.m4a */; };
+		837FF31D1C4EE10400D7F014 /* radarhalf.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 837FF31A1C4EE10400D7F014 /* radarhalf.m4a */; };
+		837FF31E1C4EE10400D7F014 /* radarthreefourths.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 837FF31B1C4EE10400D7F014 /* radarthreefourths.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		3FBFC3641C3F03EE003A241C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FBFC3741C436354003A241C /* ClockFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockFace.swift; path = ../ClockFace.swift; sourceTree = "<group>"; };
 		3FBFC3761C436A4D003A241C /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
+		837FF3191C4EE10400D7F014 /* radar.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = radar.m4a; path = ../radar.m4a; sourceTree = "<group>"; };
+		837FF31A1C4EE10400D7F014 /* radarhalf.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = radarhalf.m4a; path = ../radarhalf.m4a; sourceTree = "<group>"; };
+		837FF31B1C4EE10400D7F014 /* radarthreefourths.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = radarthreefourths.m4a; path = ../radarthreefourths.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,9 @@
 		3FBFC3411C3F03EE003A241C /* AlarmClock */ = {
 			isa = PBXGroup;
 			children = (
+				837FF3191C4EE10400D7F014 /* radar.m4a */,
+				837FF31A1C4EE10400D7F014 /* radarhalf.m4a */,
+				837FF31B1C4EE10400D7F014 /* radarthreefourths.m4a */,
 				3FBFC3761C436A4D003A241C /* ClockViewController.swift */,
 				3FBFC3741C436354003A241C /* ClockFace.swift */,
 				3FBFC3421C3F03EE003A241C /* AppDelegate.swift */,
@@ -235,9 +244,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				837FF31E1C4EE10400D7F014 /* radarthreefourths.m4a in Resources */,
 				3FBFC34D1C3F03EE003A241C /* LaunchScreen.storyboard in Resources */,
 				3FBFC34A1C3F03EE003A241C /* Assets.xcassets in Resources */,
+				837FF31D1C4EE10400D7F014 /* radarhalf.m4a in Resources */,
 				3FBFC3481C3F03EE003A241C /* Main.storyboard in Resources */,
+				837FF31C1C4EE10400D7F014 /* radar.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +502,7 @@
 				3FBFC3691C3F03EE003A241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FBFC36A1C3F03EE003A241C /* Build configuration list for PBXNativeTarget "AlarmClockTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +511,7 @@
 				3FBFC36C1C3F03EE003A241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FBFC36D1C3F03EE003A241C /* Build configuration list for PBXNativeTarget "AlarmClockUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +520,7 @@
 				3FBFC36F1C3F03EE003A241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
