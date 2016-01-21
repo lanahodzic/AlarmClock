@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Alarms-->
@@ -15,7 +16,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" id="EF3-G2-mst" customClass="AlarmCell" customModule="AlarmClock" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EF3-G2-mst" id="OlE-FR-ihH">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -51,11 +52,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Alarms" id="Hn2-HU-P01">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="R9L-wK-n2W">
-                            <connections>
-                                <segue destination="5S8-yC-mlc" kind="show" id="eM4-E8-YYJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="R9L-wK-n2W">
+                                <connections>
+                                    <segue destination="5S8-yC-mlc" kind="show" id="eM4-E8-YYJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="ic_action_important-1" id="ZV8-vg-UYq" userLabel="Special Add">
+                                <connections>
+                                    <segue destination="bF3-RS-Zzf" kind="show" id="K85-1q-cP4"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="alarm_table" destination="PIa-aj-KkE" id="8GB-kC-J0R"/>
@@ -64,6 +72,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZx-kr-XLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-281" y="-293"/>
+        </scene>
+        <!--Add Alarm from Current Time-->
+        <scene sceneID="mMM-4G-5Mq">
+            <objects>
+                <viewController id="bF3-RS-Zzf" customClass="AlarmViewController" customModule="AlarmClock" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lf6-qh-jkv"/>
+                        <viewControllerLayoutGuide type="bottom" id="CQa-ya-xFR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W3f-mL-JwL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xEM-iP-yEU">
+                                <rect key="frame" x="20" y="72" width="320" height="216"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bD-bd-xAU">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Add Alarm from Current Time" id="1eh-sG-pDK">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="Gia-vU-gXX"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="q3c-MR-apH">
+                            <connections>
+                                <action selector="SaveAlarm:" destination="bF3-RS-Zzf" id="VWJ-Sp-dfo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="timePicker" destination="1bD-bd-xAU" id="6iq-1P-fdg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t4g-8v-jhC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="691" y="-445"/>
         </scene>
         <!--Set Alarm Time-->
         <scene sceneID="7Ui-mW-AM4">
@@ -81,14 +130,14 @@
                     <navigationItem key="navigationItem" title="Set Alarm Time" id="3h9-8s-Hff">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="SxG-1s-7Dc">
                             <connections>
-                                <segue destination="uVn-38-MjF" kind="show" id="6iA-qI-EHU"/>
+                                <action selector="saveAlarm:" destination="5S8-yC-mlc" id="u7a-g8-b0b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6R3-Ty-wp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="857" y="-449"/>
+            <point key="canvasLocation" x="721" y="251"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eHs-Ib-jNa">
@@ -107,7 +156,7 @@
             <point key="canvasLocation" x="-1101" y="-293"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="6iA-qI-EHU"/>
-    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="ic_action_important-1" width="32" height="32"/>
+    </resources>
 </document>

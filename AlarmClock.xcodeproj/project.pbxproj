@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F2580E61C505AF600DECB53 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2580E51C505AF600DECB53 /* AlarmViewController.swift */; };
 		3FBFC3431C3F03EE003A241C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3421C3F03EE003A241C /* AppDelegate.swift */; };
 		3FBFC3451C3F03EE003A241C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFC3441C3F03EE003A241C /* ViewController.swift */; };
 		3FBFC3481C3F03EE003A241C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FBFC3461C3F03EE003A241C /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F2580E51C505AF600DECB53 /* AlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		3FBFC33F1C3F03EE003A241C /* AlarmClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FBFC3421C3F03EE003A241C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FBFC3441C3F03EE003A241C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				3FBFC3421C3F03EE003A241C /* AppDelegate.swift */,
 				3FBFC3441C3F03EE003A241C /* ViewController.swift */,
 				3FBFC3461C3F03EE003A241C /* Main.storyboard */,
+				3F2580E51C505AF600DECB53 /* AlarmViewController.swift */,
 				3FBFC3491C3F03EE003A241C /* Assets.xcassets */,
 				3FBFC34B1C3F03EE003A241C /* LaunchScreen.storyboard */,
 				3FBFC34E1C3F03EE003A241C /* Info.plist */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2580E61C505AF600DECB53 /* AlarmViewController.swift in Sources */,
 				3FBFC3451C3F03EE003A241C /* ViewController.swift in Sources */,
 				3FBFC3751C436354003A241C /* ClockFace.swift in Sources */,
 				3FBFC3431C3F03EE003A241C /* AppDelegate.swift in Sources */,
@@ -490,6 +494,7 @@
 				3FBFC3691C3F03EE003A241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FBFC36A1C3F03EE003A241C /* Build configuration list for PBXNativeTarget "AlarmClockTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +503,7 @@
 				3FBFC36C1C3F03EE003A241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FBFC36D1C3F03EE003A241C /* Build configuration list for PBXNativeTarget "AlarmClockUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +512,7 @@
 				3FBFC36F1C3F03EE003A241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

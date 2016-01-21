@@ -26,7 +26,7 @@ class ViewController: UITableViewController {
     
     @IBAction func SetAlarm(sender: AnyObject) {
         let alarm_switch = sender as! UISwitch
-        alarm_switch.addTarget(self, action: "toggleAlarm", forControlEvents: UIControlEvents.ValueChanged)
+  //      alarm_switch.addTarget(self, action: "toggleAlarm", forControlEvents: UIControlEvents.ValueChanged)
         let cell = alarm_switch.superview!.superview as! AlarmCell
         cell.alarmSet = alarm_switch.selected
 
@@ -47,6 +47,7 @@ class ViewController: UITableViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -62,6 +63,7 @@ class ViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // if selectedRowIndex != indexPath.row {
@@ -70,6 +72,8 @@ class ViewController: UITableViewController {
         let cell = self.alarm_table.cellForRowAtIndexPath(indexPath) as! AlarmCell
         let del = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 34))
         del.setTitle("Delete", forState: UIControlState.Normal)
+        del.addTarget(self, action: "deleteAlarm:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         self.alarm_table.cellForRowAtIndexPath(indexPath)?.addSubview(del)
         
         if selectedRowIndex != -1 {
@@ -93,6 +97,17 @@ class ViewController: UITableViewController {
         self.alarm_table.endUpdates()
         //   }
     }
+    
+    func deleteAlarm(sender: UIButton!) {
+        // let button = sender as! UIButton
+        let cell = sender.superview! as! AlarmCell
+        alarms.removeAtIndex(cell.state.tag)
+        selectedRowIndex = -1
+        cell.alarmSet = false
+        cell.state.setOn(false, animated: true)
+        self.alarm_table.reloadData()
+    }
+    
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == selectedRowIndex &&  isCellTapped {

@@ -19,122 +19,96 @@ class ClockViewController: UIViewController {
     var hourPos: CGPoint?
     var minVec:CGVector?
     var hourVec:CGVector?
+    var hourSet = false
+    var minSet = false
+    var hour = 0
+    var min = 0
     
-    @IBAction func SaveAlarm(sender: AnyObject) {
-        //TODO figure out how to get what number is selected
-        // drawText(rect, context: context!, x:CGRectGetMidX(rect), y: CGRectGetMidY(rect), radius: radius, sides: 12, color: UIColor.whiteColor())
-        let radius = CGRectGetWidth(self.view.frame) / 3.5
-        let x = CGRectGetMidX(self.clockView!.frame)
-        let y = CGRectGetMidY(self.clockView!.frame)
-        let sides = 12
-        let inset:CGFloat = radius / 3.5
-        let points = circleCircumferencePoints(sides, x: x, y: y, radius: radius - inset, adjustment: 270)
-        
-        for p in points.enumerate() {
-            if p.index > 0 {
-                let vec = CGVector(dx: hourPos!.x - x, dy: hourPos!.y - y)
-                let hour_len = sqrt(vec.dx * vec.dx + vec.dy * vec.dy)
-                let ang = (vec.dy / hour_len)
-                let rad = asin(ang)
-                let deg = rad * (180 / CGFloat(M_PI))
-//                 + ((M_PI) * 270 / 180)
-                print("\(ang)")
-                print("\(rad)")
-                print("\(deg)")
-                print("\((deg + 1) / 30)")
-                let hour = Int(floor((deg + 5) / 30))
-                print("\(hour)")
-                
-                let min_vec = CGVector(dx: minPos!.x - x, dy: minPos!.y - y)
-                let min_len = sqrt(min_vec.dx * min_vec.dx + min_vec.dy * min_vec.dy)
-                let min_ang = (min_vec.dy / min_len)
-                let min_rad = asin(min_ang)
-                let min_deg = min_rad * (180 / CGFloat(M_PI)) + 90
-//                // + ((M_PI) * 270 / 180)
-//                print("\(rad)")
-//                print("\(deg)")
-//                print("\((deg + 1) / 30)")
-                let min = Int(floor((min_deg + 5) / 30)) * 5
-                print("\(min)")
-//                var x_diff = hourPos!.x - p.element.x
-//                var y_diff = hourPos!.y - p.element.y
-//               // if abs(x_diff) < 5.0 { //&& abs(y_diff) > 5.0 {
-//                    print("hour hand")
-//                    print("\(x_diff)")
-//                    print("\(y_diff)")
-//                    print("\(p.index.description)")
-//                    //print("\(p.element.x), \(p.element.y)")
-//                    //print("\(hourPos!.x), \(hourPos!.y)")
-//                //}
-//                
-//                //let mx = minPos!.x - bounds.width/2
-//               // let my = minPos!.y - bounds.midY
-//                
-//                x_diff = minPos!.x - p.element.x
-//                y_diff = minPos!.y - p.element.y
-//                //if abs(x_diff) < 5.0 { //&& abs(y_diff) > 10.0 {
-//                    print("minute hand")
-//                    print("\(x_diff)")
-//                    print("\(y_diff)")
-//                    print("\(p.index.description)")
-//                    //print("\(p.element.x), \(p.element.y)")
-//                    //print("\(hourPos!.x), \(hourPos!.y)")
-//                //}
+    @IBAction func saveAlarm(sender: AnyObject) {
+        let viewcontrollers = self.navigationController!.viewControllers
+        let controller = viewcontrollers[0] as! ViewController
+        if hourSet && minSet {
+            
+            let rad = (atan2(hourVec!.dx, (-1 * hourVec!.dy)) / (2.0 * CGFloat(M_PI))) * 12.0
+            
+            if rad < 0.0 {
+               hour = Int(rad + 12)
+            }
+            else {
+                hour = Int(rad + 0.4)
+            }
+
+            let min_rad = (atan2(minVec!.dx, (-1 * minVec!.dy)) / (2.0 * CGFloat(M_PI))) * 60.0
+           // min = Int(min_rad)
+            if min_rad < 0.0 {
+                min = Int(min_rad + 60)
+            }
+            else {
+                min = Int(min_rad)
+            }
+            print("\(min)")
+            
+            switch min {
+            case 0...9:
+                controller.alarms.append("\(hour):0\(min) AM")
+            default:
+                controller.alarms.append("\(hour):\(min) AM")
+            }
+        }
+        else if !hourSet && minSet {
+            let min_rad = (atan2(minVec!.dx, (-1 * minVec!.dy)) / (2.0 * CGFloat(M_PI))) * 60.0
+            if min_rad < 0.0 {
+                min = Int(min_rad + 60)
+            }
+            else {
+                min = Int(min_rad)
             }
             
+            var time = ctime()
+            var time_day = "AM"
+            
+            if time.h > 12 {
+                time.h -= 12
+                time_day = "PM"
+            }
+            
+            switch min {
+            case 0...9:
+                controller.alarms.append("\(time.h):0\(min) \(time_day)")
+            default:
+                controller.alarms.append("\(time.h):\(min) \(time_day)")
+            }
+
+        }
+        else if hourSet && !minSet{
+            let time = ctime()
+            let rad = (atan2(hourVec!.dx, (-1 * hourVec!.dy)) / (2.0 * CGFloat(M_PI))) * 12.0
+            
+            if rad < 0.0 {
+                hour = Int(rad + 12)
+            }
+            else {
+                hour = Int(rad + 0.4)
+            }
+
+            controller.alarms.append("\(hour):\(time.m) AM")
+        }
+        else {
+            //use current time as alarm time
+            var time = ctime()
+            var time_day = "AM"
+            
+            if time.h > 12 {
+                time.h -= 12
+                time_day = "PM"
+            }
+            
+            controller.alarms.append("\(time.h):\(time.m) \(time_day)")
         }
         
-        //        let path = CGPathCreateMutable()
-        //        CGPathMoveToPoint(path, nil, x, y)
+        controller.alarm_table!.reloadData()
         
-        //        for i in 0...points.count - 2 {
-        //            CGPathAddLineToPoint(path, nil, points[i].x, points[i].y)
-        //
-        //            let bpath = UIBezierPath(CGPath: path)
-        //            //bpath.closePath()
-        //            let res = bpath.containsPoint(hourPos!)
-        //            print("\(res)")
-        //            let context = UIGraphicsGetCurrentContext()
-        //            CGContextSetFillColorWithColor(context, UIColor.blueColor().CGColor)
-        //            CGContextSetStrokeColorWithColor(context, UIColor.blueColor().CGColor)
-        //            CGContextSetLineWidth(context, 4.0)
-        //            CGContextAddPath(context, path)
-        //            CGContextFillPath(context)
-        //
-        //        }
-        //
-        //        CGPathAddLineToPoint(path, nil, points[i+1].x, points[i+1].y)
-        //        //CGPathAddLineToPoint(path, nil, x, y)
-        //        CGPathCloseSubpath(path)
-        //let otherres =
-        
-        
-        //                let aFont = UIFont(name: "Optima-Bold", size: radius/5)
-        //                let attr:CFDictionaryRef = [NSFontAttributeName:aFont!, NSForegroundColorAttributeName: UIColor.whiteColor()]
-        //                let text = CFAttributedStringCreate(nil, p.index.description, attr)
-        //                let line = CTLineCreateWithAttributedString(text)
-        //                let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
-        //                let xn = p.element.x - bounds.width/2
-        //                let yn = p.element.y - bounds.midY
-        //               // print("\(p.index.description)")
-        //                //print("\(xn), \(yn)")
-        //
-        //                let px = hourPos!.x - bounds.width/2
-        //                let py = hourPos!.y - bounds.midY
-        //                var diff = xn - hourPos!.x
-        //                if diff < 0.0 {
-        //                    diff = 0 - diff
-        //                }
-        //
-        //                print("\(diff)")
-        //
-        //                if diff < 5.0 {
-        //                    print("\(p.index.description)")
-        ////                    print("\(xn - px)")
-        ////                    print("\(xn), \(yn)")
-        ////                    print("\(px), \(py)")
-        ////                    print("\(hourPos!.x), \(hourPos!.y)")
-        //                }
+        self.navigationController?.popToRootViewControllerAnimated(true)
 
     }
     
@@ -179,12 +153,15 @@ class ClockViewController: UIViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first! as UITouch
         let location = touch.locationInView(self.clockView!)
+        print("\(location.x), \(location.y)")
         if i % 2 == 0 {
             //TODO make sure the hour hand is shorter than the minute hand
             print("TOUCH")
+            hourSet = true
             let path = CGPathCreateMutable()
             let c_x = CGRectGetMidX(self.clockView!.frame)
             let c_y = CGRectGetMidY(self.clockView!.frame)
+            //print("\(c_x), \(c_y)")
             CGPathMoveToPoint(path, nil, c_x, c_y)
             let vec = CGVector(dx: location.x - c_x, dy: location.y - c_y)
             hourVec = vec
@@ -202,6 +179,7 @@ class ClockViewController: UIViewController {
         else {
             //TODO make sure that the minute hand is longer than the hour hand
             print("TOUCH")
+            minSet = true
             let path = CGPathCreateMutable()
             let c_x = CGRectGetMidX(self.clockView!.frame)
             let c_y = CGRectGetMidY(self.clockView!.frame)
@@ -270,53 +248,15 @@ class ClockViewController: UIViewController {
         
         return (h:points[0],m:points[1],s:points[2])
     }
-    
+    /*
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let controller = segue.destinationViewController as! ViewController
-        controller.alarms.append("7:35 AM")
-        let x = CGRectGetMidX(self.clockView!.frame)
-        let y = CGRectGetMidY(self.clockView!.frame)
-        let vec = CGVector(dx: hourPos!.x - x, dy: hourPos!.y - y)
-        let hour_len = sqrt(vec.dx * vec.dx + vec.dy * vec.dy)
-        let ang = (vec.dy / hour_len)
-        print("\(vec.dx), \(vec.dy)")
-        if vec.dx < 0 {
-            
-        }
-//        let rad = asin(ang)
-//        var deg : CGFloat = 0
-//        if vec.dx > 0 {
-//            deg = rad * (180 / CGFloat(M_PI)) + CGFloat(270)
-//        }
-//        else {
-//            deg = rad * (180 / CGFloat(M_PI)) + CGFloat(90)
-//        }
-//        //                 + ((M_PI) * 270 / 180)
-//        print("\(ang)")
-//        print("\(rad)")
-//        print("\(deg)")
-//        print("\((deg + 1) / 30)")
-//        let hour = Int(floor((deg + 5) / 30))
-//        print("\(hour)")
-        
-        let min_vec = CGVector(dx: minPos!.x - x, dy: minPos!.y - y)
-        let min_len = sqrt(min_vec.dx * min_vec.dx + min_vec.dy * min_vec.dy)
-        let min_ang = (min_vec.dy / min_len)
-        let min_rad = asin(min_ang)
-        let min_deg = min_rad * (180 / CGFloat(M_PI)) + 90
-        //                // + ((M_PI) * 270 / 180)
-        //                print("\(rad)")
-        //                print("\(deg)")
-        //                print("\((deg + 1) / 30)")
-        let min = Int(floor((min_deg + 5) / 30)) * 5
-        print("\(min)")
-        controller.alarm_table?.reloadData()
-    // Get the new view controller using segue.destinationViewController.
+        // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
-    }
+    }*/
 
     
 }
+
