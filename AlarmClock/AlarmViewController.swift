@@ -48,7 +48,7 @@ class AlarmViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         let viewcontrollers = self.navigationController!.viewControllers
         let controller = viewcontrollers[0] as! ViewController
         controller.alarms.append("\(time.h):\(time.m) \(time_day)")
-        controller.alarm_table!.reloadData()
+        controller.alarm_table?.reloadData()
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     

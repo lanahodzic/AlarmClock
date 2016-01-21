@@ -106,7 +106,7 @@ class ClockViewController: UIViewController {
             controller.alarms.append("\(time.h):\(time.m) \(time_day)")
         }
         
-        controller.alarm_table!.reloadData()
+        controller.alarm_table?.reloadData()
         
         self.navigationController?.popToRootViewControllerAnimated(true)
 

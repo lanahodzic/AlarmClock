@@ -53,8 +53,8 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSnoozeNotification", name: "snoozeNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleDismissNotification", name: "dismissNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSnoozeNotification:", name: "snoozeNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleDismissNotification:", name: "dismissNotification", object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -133,7 +133,7 @@ class ViewController: UITableViewController {
         return alarms.count
     }
 
-    func handleSnoozeNotification() {
+   @objc func handleSnoozeNotification() {
         print("SNOOZE")
         let notification = UILocalNotification()
         notification.timeZone = NSTimeZone.defaultTimeZone()
@@ -146,7 +146,7 @@ class ViewController: UITableViewController {
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 
-    func handleDismissNotification() {
+   @objc func handleDismissNotification() {
         print("DISMISS")
     }
 }
