@@ -15,42 +15,44 @@ class AlarmCell: UITableViewCell {
 }
 
 class ViewController: UITableViewController {
-<<<<<<< HEAD
     
     var alarms: [String] = ["6:00 AM", "7:30 AM", "8:15 AM", "10:30 AM"]
+    var sounds: [String] = ["radarhalf.m4a", "radarthreefourths.m4a", "radar.m4a"]
     var selectedRowIndex = -1
     var isCellTapped = false
-=======
-
-    var alarms: [String] = ["6:00 AM", "7:30 AM", "8:15 AM", "11:18"]
+    var snoozeCount = 0
 
     var openedFromNotification: Bool = false
->>>>>>> origin/master
     
     @IBOutlet var alarm_table: UITableView!
     
     @IBAction func SetAlarm(sender: AnyObject) {
         let alarm_switch = sender as! UISwitch
-        alarm_switch.addTarget(self, action: "toggleAlarm", forControlEvents: UIControlEvents.ValueChanged)
+<<<<<<< HEAD
+  //      alarm_switch.addTarget(self, action: "toggleAlarm", forControlEvents: UIControlEvents.ValueChanged)
+=======
+>>>>>>> origin/master
         let cell = alarm_switch.superview!.superview as! AlarmCell
         cell.alarmSet = alarm_switch.selected
 
         if alarm_switch.on {
-            let timeComponents = cell.time.text?.componentsSeparatedByString(":")
+//            let timeComponents = cell.time.text?.componentsSeparatedByString(":")
             let notification = UILocalNotification()
             notification.timeZone = NSTimeZone.defaultTimeZone()
-            let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-            let alarmDate = gregorian?.nextDateAfterDate(NSDate(), matchingHour: Int(timeComponents![0])!, minute: Int(timeComponents![1])!, second: 0, options: NSCalendarOptions.MatchNextTime)
-            notification.fireDate = alarmDate
-            notification.fireDate = NSDate().dateByAddingTimeInterval(10)
-            notification.alertBody = "Wake up"
+//            let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+            // let alarmDate = gregorian?.nextDateAfterDate(NSDate(), matchingHour: Int(timeComponents![0])!, minute: Int(timeComponents![1])!, second: 0, options: NSCalendarOptions.MatchNextTime)
+            // notification.fireDate = alarmDate
+            notification.fireDate = NSDate().dateByAddingTimeInterval(7)
+            notification.alertBody = "Snooze"
             notification.hasAction = true
-            notification.soundName = UILocalNotificationDefaultSoundName
+            notification.soundName = "radarhalf.m4a"
             notification.category = "alarmCategory"
+            self.snoozeCount = 0
             print(notification)
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,15 +69,22 @@ class ViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // if selectedRowIndex != indexPath.row {
         
         self.alarm_table.cellForRowAtIndexPath(indexPath)?.backgroundColor = UIColor.grayColor()
+        let cell = self.alarm_table.cellForRowAtIndexPath(indexPath) as! AlarmCell
+        let del = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 34))
+        del.setTitle("Delete", forState: UIControlState.Normal)
+        del.addTarget(self, action: "deleteAlarm:", forControlEvents: UIControlEvents.TouchUpInside)
         
+        self.alarm_table.cellForRowAtIndexPath(indexPath)?.addSubview(del)
         
         if selectedRowIndex != -1 {
             self.alarm_table.cellForRowAtIndexPath(NSIndexPath(forRow: self.selectedRowIndex, inSection: 0))?.backgroundColor = UIColor.whiteColor()
+            del.removeFromSuperview()
         }
             
         if self.selectedRowIndex != indexPath.row {
@@ -94,6 +103,17 @@ class ViewController: UITableViewController {
         self.alarm_table.endUpdates()
         //   }
     }
+    
+    func deleteAlarm(sender: UIButton!) {
+        // let button = sender as! UIButton
+        let cell = sender.superview! as! AlarmCell
+        alarms.removeAtIndex(cell.state.tag)
+        selectedRowIndex = -1
+        cell.alarmSet = false
+        cell.state.setOn(false, animated: true)
+        self.alarm_table.reloadData()
+    }
+    
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == selectedRowIndex &&  isCellTapped {
@@ -116,21 +136,15 @@ class ViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alarms.count
     }
-<<<<<<< HEAD
-    
-    
-    
-    
-=======
 
     func handleSnoozeNotification() {
         print("SNOOZE")
         let notification = UILocalNotification()
         notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.fireDate = NSDate().dateByAddingTimeInterval(10)
-        notification.alertBody = "Wake up (snooze)"
+        notification.fireDate = NSDate().dateByAddingTimeInterval(7)
+        notification.alertBody = "Snooze"
         notification.hasAction = true
-        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.soundName = self.sounds[min(++self.snoozeCount, 2)]
         notification.category = "alarmCategory"
         print(notification)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
@@ -139,6 +153,5 @@ class ViewController: UITableViewController {
     func handleDismissNotification() {
         print("DISMISS")
     }
->>>>>>> origin/master
 }
 
